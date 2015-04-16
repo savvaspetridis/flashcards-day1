@@ -2,10 +2,26 @@
 <html>
     <head>
         <title>Flash Cards</title>
+        <script src="angular.js"></script>
+        <script src="app.js"></script>
         <!-- We've provided some styles for you, aren't we nice? -->
         <link rel="stylesheet" type="text/css" href="reset.css" />
         <link rel="stylesheet" type="text/css" href="style.css" />
     </head>
     <body>
+    	<div ng-app="FlashCards" ng-controller="MainController">
+    		<div class="flash-card" ng-controller="FlashCardController" ng-repeat="card in flashCards | orderBy:'question'">
+    			<h1>{{card.question}}</h1>
+    			<ul class="flash-card-answers">
+        			<li class="flash-card-answer" ng-repeat="ans in card.answers" ng-click="answerQuestion(ans)">
+        				{{ ans.text }}
+        			<h2 class = "answer-feedback" ng-show = "answered" ng-class="{correct: answeredCorrectly == true, incorrect: answeredCorrectly == false}">
+						<span ng-show = "answeredCorrectly">Yeah, you got it right!</span>
+						<span ng-show = "!answeredCorrectly">Nope, you got it wrong.</span>
+	    			</h2>
+        			</li>	
+    			</ul>
+			</div>
+    	</div>
     </body>
 </html>
